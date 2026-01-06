@@ -1,6 +1,14 @@
 node_modules
 dist
 .DS_Store
+node_modules
+dist
+client/node_modules
+server/node_modules
+*.log
+*.env
+client/dist
+server/dist
 apps/api/dist
 apps/web/dist
 coverage
