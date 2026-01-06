@@ -1,30 +1,17 @@
-export type LatLng = { lat: number; lng: number };
-
-export type ToiletSummary = {
-  id: string;
+export interface Bathroom {
+  _id: string;
   name: string;
   buildingCode: string;
-  floor?: string;
-  location: LatLng;
-  avgStars: number;
+  buildingName: string;
+  location: { lat: number; lng: number };
+  tags?: string[];
+  avgRating?: number;
+  ratingCount?: number;
+  score?: number;
+}
+
+export interface RatingSummary {
+  bathroomId: string;
+  avgRating: number;
   ratingCount: number;
-  score: number;
-};
-
-export type Rating = {
-  stars: number;
-  comment?: string;
-  createdAt: string;
-};
-
-export type ToiletDetail = ToiletSummary & {
-  buildingName?: string;
-  gender?: string;
-  ratings?: Rating[];
-};
-
-export type User = {
-  id: string;
-  email: string;
-  userName?: string;
-};
+}
