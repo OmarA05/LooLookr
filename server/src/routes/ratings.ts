@@ -8,7 +8,7 @@ const router = Router();
 
 const ratingSchema = z.object({
   bathroomId: z.string(),
-  stars: z.number().int().min(0).max(5),
+  stars: z.coerce.number().int().min(0).max(5),
 });
 
 const ratingSummary = async (bathroomId: Types.ObjectId) => {

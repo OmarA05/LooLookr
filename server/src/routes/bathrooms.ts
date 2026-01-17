@@ -97,7 +97,7 @@ router.get("/top10", async (_req, res) => {
       },
     },
     { $project: { ratings: 0 } },
-    { $sort: { score: -1 } },
+    { $sort: { ratingCount: -1, score: -1 } },
     { $limit: 10 },
   ]);
 

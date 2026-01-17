@@ -33,6 +33,14 @@ const FlyToBathroom: React.FC<{ bathroom?: Bathroom }> = ({ bathroom }) => {
   return null;
 };
 
+type MapContainerExtras = { center: [number, number]; zoom: number };
+const MapContainerTyped = MapContainer as React.ComponentType<
+  React.ComponentProps<typeof MapContainer> & MapContainerExtras
+>;
+const TileLayerTyped = TileLayer as React.ComponentType<
+  React.ComponentProps<typeof TileLayer> & { attribution?: string }
+>;
+
 const MapView: React.FC<Props> = ({ bathrooms, selectedId, onSelect, user, onRequireAuth, onRefresh }) => {
   const [ratingDraft, setRatingDraft] = useState<Record<string, number>>({});
 
@@ -66,9 +74,9 @@ const MapView: React.FC<Props> = ({ bathrooms, selectedId, onSelect, user, onReq
         <div className="muted">Tap a marker to rate</div>
       </div>
       <div className="map-wrapper">
-        <MapContainer center={center} zoom={15} style={{ height: "100%", width: "100%" }}>
+        <MapContainerTyped center={center} zoom={15} style={{ height: "100%", width: "100%" }}>
           <FlyToBathroom bathroom={selectedBathroom} />
-          <TileLayer
+          <TileLayerTyped
             attribution='&copy; OpenStreetMap contributors, &copy; CARTO'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
@@ -113,7 +121,7 @@ const MapView: React.FC<Props> = ({ bathrooms, selectedId, onSelect, user, onReq
               </Popup>
             </Marker>
           ))}
-        </MapContainer>
+        </MapContainerTyped>
       </div>
     </div>
   );
